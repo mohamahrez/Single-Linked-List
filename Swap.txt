@@ -1,0 +1,22 @@
+Given a linked list and the elements to be swapped (val1 and val2), we need to keep track of four values:
+
+node1: the node that matches val1
+node1_prev: node1‘s previous node
+node2: the node that matches val2
+node2_prev: node2‘s previous node
+Given an input of a linked list, val1, and val2, the general steps for doing so is as follows:
+
+Iterate through the list looking for the node that matches val1 to be swapped (node1), keeping track of the node’s previous node as you iterate (node1_prev)
+Repeat step 1 looking for the node that matches val2 (giving you node2 and node2_prev)
+If node1_prev is None, node1 was the head of the list, so set the list’s head to node2
+Otherwise, set node1_prev‘s next node to node2
+If node2_prev is None, set the list’s head to node1
+Otherwise, set node2_prev‘s next node to node1
+Set node1‘s next node to node2‘s next node
+Set node2‘s next node to node1‘s next node.
+------------------------------------------------
+
+Time and Space Complexity:
+The worst case for time complexity in swap_nodes() is if both while loops must iterate all the way through to the end (either if there are no matching nodes, or if the matching node is at the tail). This means that it has a linear big O runtime of O(n), since each while loop has a O(n) runtime, and constants are dropped.
+
+There are four new variables created in the function regardless of the input, which means that it has a constant space complexity of O(1).

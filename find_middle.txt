@@ -1,0 +1,69 @@
+Pointers at Different Speeds
+
+
+Using two pointers moving in parallel was a good solution to the previous problem. However, there are other problems where having two pointers moving in parallel wouldn’t be as useful. Let’s take a look at one of those problems and consider a new strategy that uses two pointers moving at different speeds.
+
+Consider the following problem:
+
+Create a method that returns the middle node of a linked list.
+
+For example, given the linked list with the following elements 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7, the middle node would be the element with value 4.
+
+Approaches
+As before, it’s possible to find a solution by iterating through the entire list, creating a list representation, and then returning the middle index. But, also as before, this can potentially take up lots of extra space:
+
+create list
+while the linked list has not been fully iterated through
+  push the current element onto list
+  move forward one node
+return list[length / 2]
+Instead, we can use two pointers to move through the linked list. The first pointer takes two steps through the linked list for every one step that the second takes, so it iterates twice as fast:
+
+fast pointer = linked list head
+slow pointer = linked list head
+while fast pointer is not None
+  move fast pointer forward
+  if the end of the linked list has not been reached
+    move fast pointer forward
+    move slow pointer forward
+return slow pointer
+When the first pointer reaches the end of the list, the “slower” second pointer will be pointing to the middle element. Let’s visualize the steps of the algorithm:
+
+Starting State
+
+F
+S
+1  2  3  4  5  6  7
+First Tick
+
+      F
+   S
+1  2  3  4  5  6  7
+Second Tick
+
+            F
+      S
+1  2  3  4  5  6  7
+Third Tick
+
+                  F
+         S
+1  2  3  4  5  6  7
+Final Tick
+
+                     F
+         S
+1  2  3  4  5  6  7  None
+
+As long as we always move the fast pointer first and check to see that it is not None before moving it and the slow pointer again, we’ll exit iteration at the proper time and have a reference to the middle node with the slow pointer.
+
+Time and Space Complexity:
+
+As with the nth-to-last solution, this solution has O(n) time complexity, and O(1) space complexity (we always use two variables no matter what size the linked list is: two pointers).
+
+Conclusions:
+
+Many linked list problems can be solved with the two-pointer technique. If it seems like a linked list problem requires keeping track of multiple positions or creating other data representations (such as using a list), consider whether two pointers iterating in parallel or at different speeds could help solve the problem efficiently. We didn’t cover full solutions to these here, but variations on the two-pointer technique can be used to:
+
+Detect a cycle in a linked list
+Rotate a linked list by k places
